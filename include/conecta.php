@@ -3,10 +3,10 @@ $mensaje ="Hola";
 $servidor ="localhost";
 $usuario ="root";
 $password ="";
-$bd ="WebApp";
-$mysql = mysqli_connect($servidor,$usuario,$password,$bd);
-if ($mysql->connect_error) {
-  die("Error al conectarse con la base de datos de la WebApp".$mysql->connect_error);
+$bd ="web";
+$mysqli = mysqli_connect($servidor,$usuario,$password,$bd);
+if ($mysqli->connect_error) {
+  die("Error al conectarse con la base de datos de la WebApp".$mysqli->connect_error);
 }
 else {
   $mensaje.="<div class=´alert alert-success alert-dismissible fade show´ role=´alert´>
