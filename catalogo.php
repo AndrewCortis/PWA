@@ -96,13 +96,13 @@
                   <div class="card-body">
                     <h5 class="card-title"><?php echo $row["Nombre"];?></h5>
                     <p class="card-text"><?php echo $row["Descripcion"];?></p>
-                    <p class="card-text"><small class="text-muted"><?php echo $row["Precio"];?></small></p>
+                    <p class="card-text"><small class="text-muted">Precio:<?php echo $row["Precio"];?>Euros</small></p>
                     <button type="button" name="btn-compra" class="btn btn-danger nav-link">Agregar al carrito</button>
                   </div>
                 </div>
               </div>
               <div class="card-rooter text-muted">
-                <?php echo $row["Id_Categoria"];?>
+                Categoria:<?php echo $row["Id_Categoria"];?>
               </div>
             </div>
           </div>
