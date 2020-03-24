@@ -1,10 +1,10 @@
 <?php
   include "include/conecta.php";
   // consulta que se utiliza para extraer datos de mi BD
-  $query = "SELECT * FROM Productos ORDER BY Id_productos";
-  $ejecuta = $mysql->query($query);
+  $query = "SELECT * FROM productos ORDER BY Id_Producto";
+  $ejecuta = $mysqli->query($query);
   $numero = $ejecuta->num_rows;
-  $mysql->close();
+  $mysqli->close();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -15,13 +15,8 @@
     <script type="text/javascript" src="jquery/jquery-3.4.1.min.js"></script>
     <title>Barra de Navegacion</title>
   </head>
-  <script type="text/javascript" src="">
-	$(document) ready(function(){
-		alert("Hola que hace")
-	})
 </script>
-  <body
-  <!-- inicia contenido de barra de Navegacion -->
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark lighten-1">
       <a class="navbar-brand" href="#">Eminem <span class="icon-menu"></span></a>
         <button class="navbar-toggler" type="button" data-loggie="collapse" data-larget="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -90,81 +85,30 @@
       <!-- Inicio de cards -->
       <div class="container">
         <div class="row">
-          <?php while($row = $ejecuta->fetch_array()) { ?>
+          <?php while($row = $ejecuta->fetch_assoc()) { ?>
           <div class="col-sm">
             <div class="card mb-3" style="max-widht: 580px">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="img/img1.jpg" class="card-img" alt="Producto01">
+                  <img src="img/<?php echo $row["Imagen"];?>" class="card-img" alt="Producto1">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">Nombre del producto</h5>
-                    <p class="card-text">Descripcion:</p>
-                    <p class="card-text"><small class="text-muted">Precio:</small></p>
+                    <h5 class="card-title"><?php echo $row["Nombre"];?></h5>
+                    <p class="card-text"><?php echo $row["Descripcion"];?></p>
+                    <p class="card-text"><small class="text-muted"><?php echo $row["Precio"];?></small></p>
                     <button type="button" name="btn-compra" class="btn btn-danger nav-link">Agregar al carrito</button>
                   </div>
                 </div>
               </div>
               <div class="card-rooter text-muted">
-                Categoria:
+                <?php echo $row["Id_Categoria"];?>
               </div>
             </div>
           </div>
         <?php } ?>
         </div>
       </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <div class="card mb-3" style="max-widht: 580px">
-              <div class="row no-gutters">
-                <div class="col-md-4">
-                  <img src="img/<?php echo $row("Imagen");?>" class="card-img" alt="Producto01">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title"><?php echo $row("Nombre");?></h5>
-                    <p class="card-text">Descripcion:<?php echo $row("Descripcion");?></p>
-                    <p class="card-text"><small class="text-muted">Precio:<?php echo $row("Precio");?></small></p>
-                    <button type="button" name="btn-compra" class="btn btn-danger nav-link">Agregar al carrito</button>
-                  </div>
-                </div>
-              </div>
-              <div class="card-rooter text-muted">
-                Categoria:<?php echo $row("Id_categoria");?>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <div class="card mb-3" style="max-widht: 580px">
-              <div class="row no-gutters">
-                <div class="col-md-4">
-                  <img src="img/img3.jpg" class="card-img" alt="Producto01">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">Nombre del producto</h5>
-                    <p class="card-text">Descripcion:</p>
-                    <p class="card-text"><small class="text-muted">Precio:</small></p>
-                    <button type="button" name="btn-compra" class="btn btn-danger nav-link">Agregar al carrito</button>
-                  </div>
-                </div>
-              </div>
-              <div class="card-rooter text-muted">
-                Categoria:
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </section>
     <!-- Termino de cards -->
     <script type="text/javascript" src="js/bootstrap.js"></script>
