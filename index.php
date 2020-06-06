@@ -17,7 +17,7 @@
               <div class="col-md-6 mx-auto">
                 <div class="card rounded-2 rounded" id="login-form">
                   <div class="card-header">
-                    <h3 class="mb-0 text-center">Login Eminem</h3>
+                    <h3 class="mb-0 text-center">Inicio de Sesión</h3>
                   </div>
                   <div class="card-body">
                     <form class="form" name="login" action="include/login.php" id="formlogin" method="POST" autocomplete="off">
@@ -35,10 +35,10 @@
                           </div>
                         </div>
                         <div class="col">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#registroModal">¿Aún no tienes cuenta?</a>
+                            <a href="registros.php" class="nav-link" data-toggle="modal" data-target="#registroModal">¿Aún no tienes cuenta?</a>
                         </div>
                       </div>
-                      <button type="sumbit" class="btn btn-success btn-lg btn-block" id="btnlogin">Acceder</button>
+                      <button type="submit" class="btn btn-success btn-lg btn-block" id="btnlogin">Acceder</button>
                     </form>
                   </div>
                 </div>

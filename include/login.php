@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  session_start(); 
   include '../include/conecta.php';
   $usuario = $_POST['user'];
   $password = md5($_POST['password']);

@@ -1,5 +1,12 @@
-<?php
-  include "include/conecta.php";
+<?php //abro php
+  session_start(); //se coloca una variable, se crea una sesión
+  include 'include/conecta.php';
+  include 'include/config.php';
+  include 'include/carrito.php';
+  $usuario = $_SESSION{'usuario'};
+    if (!isset($usuario)) {
+      header("location:index.php");
+    }
   // consulta que se utiliza para extraer datos de mi BD
   $query = "SELECT * FROM productos ORDER BY Id_Producto";
   $ejecuta = $mysqli->query($query);
@@ -12,92 +19,58 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fontello.css">
+      <link rel="stylesheet" href="css/tamaños.css">
     <script type="text/javascript" src="jquery/jquery-3.4.1.min.js"></script>
     <title>Barra de Navegacion</title>
   </head>
 </script>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark lighten-1">
-      <a class="navbar-brand" href="#">Eminem <span class="icon-menu"></span></a>
-        <button class="navbar-toggler" type="button" data-loggie="collapse" data-larget="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-          aria-expanded="false" aria-taber="Toggle navigation"
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Inicio <span class="icon-heart-empty"></span></a>
-              <span class="sr-only">(current)</span>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Tengo algo para ti <span class="icon-upload-cloud"></span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Una pequeña historia <span class="icon-spin4"></span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle "href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cosas interesante</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Mensajes de tu ex <span class="icon-mic"></span></a>
-                <a class="dropdown-item" href="#">Trabajos con salario de mas de $10000 pesos <span class="icon-share"></span></a>
-                <a class="dropdown-item" href="#">Que tus padres estén orgullosos de ti <span class="icon-mute"></span></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Vuelve después</a>
-              </div>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto nav-flex-icon">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle "href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-upload-cloud"></span>Usuario</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Perfil</a>
-                <a class="dropdown-item" href="#">Configuración</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ModalCenter">Cerrar Sesión</a>
-              </div>
-            </li>
-          </ul>
-
-        </div>
-    </nav>
+  <?php include 'include/navbar.php'; ?>
     <!-- Termina contenido de barra de Navegacion -->
     <!-- Inicio de ventana modal -->
-    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="ModalCenterTitle">Cerrar Sesión</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-tabel="Close"><span aria-hidden="true">&times;</span></button>
-          </div>
-            <div class="modal-body">¿Deseas cerrar tu sesión?</div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger">Cerrar Sesión</button>
-            </div>
-        </div>
-      </div>
-    </div>
+  <?php include 'include/modal.php'; ?>
     <!-- Fin de ventana modal -->
-    <div class="alert alert-primary" role="alert">
-    Great! Your connection is successfully.
-    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>¡Felicidades!</strong> Tu conexión fue correcta
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
     <section>
       <!-- Inicio de cards -->
       <div class="container">
+        <?php echo $accion; ?>
+        <?php if ($alert!="") { ?>
+          <div class="alert alert-success">
+            <?php echo $alert; ?>
+            <a href="carrito.php" class="badge badge-seccess">Ver Carrito de Compra</a>
+          </div>
+        <?php } ?>
+      <div class="col-lg-12 col-md-12 col-ms-12">
+        <h4>Categorias de Productos</h4>
+      </div>
         <div class="row">
           <?php while($row = $ejecuta->fetch_assoc()) { ?>
-          <div class="col-sm">
-            <div class="card mb-3" style="max-widht: 580px">
+            <div class="card mb-6" style="max-widht: 580px;">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="img/<?php echo $row["Imagen"];?>" class="card-img" alt="Producto1">
+                  <img src="img/<?php echo $row["Imagen"];?>" class="card-img" alt="producto">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title"><?php echo $row["Nombre"];?></h5>
-                    <p class="card-text"><?php echo $row["Descripcion"];?></p>
-                    <p class="card-text"><small class="text-muted">Precio:<?php echo $row["Precio"];?>Euros</small></p>
-                    <button type="button" name="btn-compra" class="btn btn-danger nav-link">Agregar al carrito</button>
+                    <p class="card-text">Descripción: <?php echo $row["Descripcion"];?></p>
+                    <p class="card-text"><small class="text-muted">Precio: $<?php echo $row["Precio"];?> Pesos</small></p>
+                    <!-- formulario para enviar al carrito de compra-->
+                    <form class="" action="" method="post">
+                      <input type="hidden" name="id" value="<?php echo openssL_encrypt($row['Id_Producto'],COD,KEY); ?>">
+                      <input type="hidden" name="nombre" value="<?php echo openssL_encrypt($row['Nombre'],COD,KEY); ?>">
+                      <input type="hidden" name="precio" value="<?php echo openssL_encrypt($row['Precio'],COD,KEY); ?>">
+                      <input type="hidden" name="numero" value="<?php echo openssL_encrypt(1,COD,KEY) ?>">
+                      <div aling="right">
+                        <button type="submit" name="btn_carrito" value="Agregar" class="btn btn-success">Agregar al carrito</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

@@ -1,0 +1,10 @@
+.imgcatalogo{
+  width: 222px;
+  height: 165px;
+}
+.imgcatalogo:hover{
+  width: 250px;
+  height: 185px;
+  transition: 1.5s;
+}
+.background-color: #FF0000;
